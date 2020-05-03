@@ -71,24 +71,26 @@ function startLoop() {
   loopDurationInSeconds = loopEnd - loopStart;
   if (loopDurationInSeconds < MIN_LOOP_DURATION_IN_SECONDS) return;
   stopLoop();
-  seekToLoopStart();
-  progressIntervalId = setInterval(updateProgressBar, MIN_LOOP_DURATION_IN_SECONDS / 10 * MILLISECONDS_PER_SECOND)
-  loopIntervalId = setInterval(seekToLoopStart, loopDurationInSeconds * MILLISECONDS_PER_SECOND);
+  restartLoop();
+  loopIntervalId = setInterval(restartLoop, loopDurationInSeconds * MILLISECONDS_PER_SECOND);
 }
 
 function stopLoop() {
-  progressBar.style.width = "0%";
-  clearInterval(progressIntervalId);
   clearInterval(loopIntervalId);
+  clearInterval(progressIntervalId);
+  progressBar.style.width = "0%";
+}
+
+function restartLoop() {
+  player.seekTo(loopStart, true);
+  clearInterval(progressIntervalId);
+  progressBar.style.width = "0%";
+  progressIntervalId = setInterval(updateProgressBar, loopDurationInSeconds / 4 * MILLISECONDS_PER_SECOND); // assume 4 beats per measure
 }
 
 function updateProgressBar() {
   let currentTime = player.getCurrentTime();
-  // TODO: WRONG
-  let percentage = (currentTime / loopEnd) * loopDurationInSeconds * 100
-  progressBar.style.width = percentage.toFixed(4) + "%";
-}
-
-function seekToLoopStart() {
-  player.seekTo(loopStart, true);
+  // TODO: Adjust so that it completes to 100 at end of loop
+  let percentage = (currentTime - loopStart) / loopDurationInSeconds * 100
+  progressBar.style.width = percentage + "%";
 }
