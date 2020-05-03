@@ -1,19 +1,21 @@
-// Copyright 2018 The Chromium Authors. All rights reserved.
-// Use of this source code is governed by a BSD-style license that can be
-// found in the LICENSE file.
-
 'use strict';
 
 chrome.runtime.onInstalled.addListener(function() {
-  chrome.storage.sync.set({color: '#3aa757'}, function() {
-    console.log('The color is green.');
-  });
   chrome.declarativeContent.onPageChanged.removeRules(undefined, function() {
     chrome.declarativeContent.onPageChanged.addRules([{
-      conditions: [new chrome.declarativeContent.PageStateMatcher({
-        pageUrl: {hostEquals: 'developer.chrome.com'},
+      conditions: [ new chrome.declarativeContent.PageStateMatcher({
+        pageUrl: { hostEquals: 'www.youtube.com' },
       })],
-      actions: [new chrome.declarativeContent.ShowPageAction()]
+      actions: [ new chrome.declarativeContent.ShowPageAction() ]
     }]);
+  });
+});
+
+chrome.pageAction.onClicked.addListener(function() {
+  chrome.tabs.query({ active: true, lastFocusedWindow: true }, tabs => {
+    let url = tabs[0].url;
+    let queryString = url.substring(url.indexOf("?"), url.length);
+    let videoId = new URLSearchParams(queryString).get('v');
+    chrome.tabs.create({ url: chrome.runtime.getURL("looptube.html?v=" + videoId) });
   });
 });
