@@ -1,28 +1,52 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <style>
-      button {
-        height: 30px;
-        width: 100px;
-        outline: none;
+      #container {
+        margin-top: 10px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 640px;
+      }
+      #controls {
+        margin-top: 10px;
         display: block;
+      }
+      .form-control {
+        text-align: center
       }
     </style>
   </head>
   <body>
-    <div id="player"></div>
-    <br>
-    <button id="markStart">Mark Start</button>
-    <button id="decrementStart">Decrement Start</button>
-    <button id="incrementStart">Increment Start</button>
-    <br>
-    <button id="markEnd">Mark End</button>
-    <button id="decrementEnd">Decrement End</button>
-    <button id="incrementEnd">Increment End</button>
-    <br>
-    <button id="startLoop">Start Loop</button>
-    <button id="stopLoop">Stop Loop</button>
+    <div id="container">
+      <div id="player"></div>
+      <div class="progress">
+          <div id="progressBar" class="progress-bar bg-danger"></div>
+        </div>
+      <div id="controls">
+        <div class="btn-group-vertical">
+          <button id="markStart" type="button" class="btn btn-primary">Mark Start</button>
+          <div class="btn-group">
+            <button id="decrementStart" type="button" class="btn btn-secondary" >-</button>
+            <button id="incrementStart" type="button" class="btn btn-secondary" >+</button>  
+          </div>
+          <input id="startTimeLabel" type="text" class="form-control" readonly>
+        </div>
+        <div class="btn-group-vertical">
+          <button id="markEnd" type="button" class="btn btn-primary">Mark End</button>
+          <div class="btn-group">
+            <button id="decrementEnd" type="button" class="btn btn-secondary">-</button>
+            <button id="incrementEnd" type="button" class="btn btn-secondary">+</button>
+          </div>
+          <input id="endTimeLabel" type="text" class="form-control" readonly>
+        </div>
+        <div class="btn-group-vertical">
+          <button id="startLoop" type="button" class="btn btn-success">Start</button>
+          <button id="stopLoop" type="button" class="btn btn-danger">End</button>
+        </div>
+      </div>
+    </div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="looptube.js"></script>
