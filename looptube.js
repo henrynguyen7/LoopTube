@@ -33,37 +33,37 @@ function onYouTubeIframeAPIReady() {
 
 function markStart() {
   loopStart = player.getCurrentTime();
-  startTimeLabel.value = loopStart.toFixed(4);
+  startTimeLabel.value = getDisplayTime(loopStart);
   startLoop();
 }
 
 function decrementStart() {
   loopStart = loopStart - INCREMENT;
-  startTimeLabel.value = loopStart.toFixed(4);
+  startTimeLabel.value = getDisplayTime(loopStart);
   startLoop();
 }
 
 function incrementStart() {
   loopStart = loopStart + INCREMENT;
-  startTimeLabel.value = loopStart.toFixed(4);
+  startTimeLabel.value = getDisplayTime(loopStart);
   startLoop();
 }
 
 function markEnd() {
   loopEnd = player.getCurrentTime();
-  endTimeLabel.value = loopEnd.toFixed(4);
+  endTimeLabel.value = getDisplayTime(loopEnd);
   startLoop();
 }
 
 function decrementEnd() {
   loopEnd = loopEnd - INCREMENT;
-  endTimeLabel.value = loopEnd.toFixed(4);
+  endTimeLabel.value = getDisplayTime(loopEnd);
   startLoop();
 }
 
 function incrementEnd() {
   loopEnd = loopEnd + INCREMENT;
-  endTimeLabel.value = loopEnd.toFixed(4);
+  endTimeLabel.value = getDisplayTime(loopEnd);
   startLoop();
 }
 
@@ -93,4 +93,9 @@ function updateProgressBar() {
   // TODO: Adjust so that it completes to 100 at end of loop
   let percentage = (currentTime - loopStart) / loopDurationInSeconds * 100
   progressBar.style.width = percentage + "%";
+}
+
+function getDisplayTime(sec){
+  let date = new Date(sec * 1000);
+  return date.getMinutes() + ":" + date.getSeconds().toString().padStart(2, "0") + "." + date.getMilliseconds().toString().padStart(3, "0");
 }
