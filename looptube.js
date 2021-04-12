@@ -98,6 +98,7 @@ function stopLoop() {
   startLoopButton.disabled = false;
   stopLoopButton.disabled = true;
   clearInterval(loopIntervalId);
+  clearTimeouts(progressTimeoutIds);
   progressBar.style.width = "0%";
 }
 
