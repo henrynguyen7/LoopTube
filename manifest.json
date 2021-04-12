@@ -1,5 +1,5 @@
 {
-  "name": "LoopTube",
+  "name": "TubeLooper",
   "version": "1.0",
   "description": "Loop clips in YouTube",
   "permissions": ["tabs", "declarativeContent"],
@@ -9,17 +9,17 @@
   },
   "page_action": {
     "default_icon": {
-      "16": "images/looptube16.png",
-      "32": "images/looptube32.png",
-      "48": "images/looptube48.png",
-      "128": "images/looptube128.png"
+      "16": "images/tubelooper16.png",
+      "32": "images/tubelooper32.png",
+      "48": "images/tubelooper48.png",
+      "128": "images/tubelooper128.png"
     }
   },
   "icons": {
-    "16": "images/looptube16.png",
-    "32": "images/looptube32.png",
-    "48": "images/looptube48.png",
-    "128": "images/looptube128.png"
+    "16": "images/tubelooper16.png",
+    "32": "images/tubelooper32.png",
+    "48": "images/tubelooper48.png",
+    "128": "images/tubelooper128.png"
   },
   "manifest_version": 2,
   "content_security_policy": "script-src 'self' https://s.ytimg.com https://www.youtube.com; object-src 'self'"
