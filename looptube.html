@@ -63,7 +63,16 @@
       }
 
       #main {
-        width: 640px;  /* width of YouTube player */
+        width: 640px;  /* Width of YouTube player */
+      }
+
+      #controls {
+        display: flex;
+        justify-content: space-between;
+      }
+
+      .control-group {
+        width: 200px;
       }
 
       .progress {
@@ -92,7 +101,7 @@
             <div id="progressBar" class="progress-bar bg-danger"></div>
           </div>
         <div id="controls">
-          <div class="btn-group-vertical">
+          <div class="control-group btn-group-vertical">
             <button id="markStart" type="button" class="btn btn-primary">Mark Start</button>
             <div class="btn-group">
               <button id="decrementStart" type="button" class="btn btn-secondary" disabled>-</button>
@@ -100,7 +109,7 @@
             </div>
             <input id="startTimeLabel" type="text" class="form-control" readonly>
           </div>
-          <div class="btn-group-vertical">
+          <div class="control-group btn-group-vertical">
             <button id="markEnd" type="button" class="btn btn-primary" disabled>Mark End</button>
             <div class="btn-group">
               <button id="decrementEnd" type="button" class="btn btn-secondary" disabled>-</button>
@@ -108,7 +117,7 @@
             </div>
             <input id="endTimeLabel" type="text" class="form-control" readonly>
           </div>
-          <div class="btn-group-vertical">
+          <div class="control-group btn-group-vertical">
             <button id="startLoop" type="button" class="btn btn-success" disabled>Start</button>
             <button id="stopLoop" type="button" class="btn btn-danger" disabled>End</button>
           </div>
