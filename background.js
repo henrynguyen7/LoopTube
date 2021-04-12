@@ -16,6 +16,6 @@ chrome.pageAction.onClicked.addListener(function() {
     let url = tabs[0].url;
     let queryString = url.substring(url.indexOf("?"), url.length);
     let videoId = new URLSearchParams(queryString).get('v');
-    chrome.tabs.create({ url: chrome.runtime.getURL("looptube.html?v=" + videoId) });
+    chrome.tabs.create({ url: chrome.runtime.getURL("tubelooper.html?v=" + videoId) });
   });
 });
