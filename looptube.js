@@ -28,7 +28,7 @@ const MILLISECONDS_PER_SECOND = 1000;
 const MIN_LOOP_DURATION_IN_SECONDS = 1;
 const INCREMENT = .10;
 
-let progressIntervalId;
+let progressTimeoutIds = [];
 let loopIntervalId;
 let loopStart = 0;
 let loopEnd = 0;
@@ -98,23 +98,28 @@ function stopLoop() {
   startLoopButton.disabled = false;
   stopLoopButton.disabled = true;
   clearInterval(loopIntervalId);
-  clearInterval(progressIntervalId);
   progressBar.style.width = "0%";
 }
 
 function restartLoop() {
   stopLoopButton.disabled = false;
   player.seekTo(loopStart, true);
-  clearInterval(progressIntervalId);
-  progressBar.style.width = "0%";
-  progressIntervalId = setInterval(updateProgressBar, loopDurationInSeconds / 4 * MILLISECONDS_PER_SECOND); // assume 4 beats per measure
+  clearTimeouts(progressTimeoutIds)
+  updateProgressBar(25);  
+  let quarterNoteDuration = loopDurationInSeconds / 4;
+  progressTimeoutIds.push(setTimeout(function() { updateProgressBar(50) }, quarterNoteDuration * 1 * 1000));
+  progressTimeoutIds.push(setTimeout(function() { updateProgressBar(75) }, quarterNoteDuration * 2 * 1000));
+  progressTimeoutIds.push(setTimeout(function() { updateProgressBar(100) }, quarterNoteDuration * 3 * 1000));
 }
 
-function updateProgressBar() {
-  let currentTime = player.getCurrentTime();
-  // TODO: Adjust so that it completes to 100 at end of loop
-  let percentage = (currentTime - loopStart) / loopDurationInSeconds * 100
+function updateProgressBar(percentage) {
   progressBar.style.width = percentage + "%";
+}
+
+function clearTimeouts(timeoutIds) {
+  for (var i = 0; i < timeoutIds.length; i++) {
+    clearTimeout(timeoutIds[i]);
+  }
 }
 
 function getDisplayTime(sec){
